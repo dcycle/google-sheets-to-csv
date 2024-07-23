@@ -1,3 +1,5 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/dcycle/google-sheets-to-csv/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/dcycle/google-sheets-to-csv/tree/master)
+
 Python Script to Copy Public Google Sheet Data to CSV File
 Prerequisites
 
