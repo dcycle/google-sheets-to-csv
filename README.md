@@ -65,7 +65,6 @@ After running the script, you can find the Google Sheet data in ./app/unversione
 
 
 Python Script to Copy Private Google Sheet Data to CSV File
-Prerequisites
 
 Step 1: Create a Google Cloud Project
 
