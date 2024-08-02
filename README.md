@@ -106,7 +106,7 @@ GOOGLE_SHEETS_SPREADSHEET_ID='<google sheet id>'
 # Name of the sheet within the spreadsheet (optional)
 GOOGLE_SHEETS_SHEET_ID='<Sheet name>'
 
-./scripts/fetch-private-google-sheets.sh "$GOOGLE_SERVICE_ACCOUNT_FILE" "$GOOGLE_SHEETS_SPREADSHEET_ID" "$GOOGLE_SHEETS_SHEET_ID" './app/unversioned/scripts/private-google-sheet-data.csv'
+./scripts/fetch-google-sheets.sh "$GOOGLE_SERVICE_ACCOUNT_FILE" "$GOOGLE_SHEETS_SPREADSHEET_ID" "$GOOGLE_SHEETS_SHEET_ID" './app/unversioned/scripts/private-google-sheet-data.csv' --private
 ```
 
 Upon sucessfully running the script, you can find the Google Sheet data in ./app/unversioned/scripts/private-google-sheet-data.csv.
