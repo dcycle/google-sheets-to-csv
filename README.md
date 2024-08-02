@@ -1,6 +1,8 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/dcycle/google-sheets-to-csv/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/dcycle/google-sheets-to-csv/tree/master)
 
 Python Script to Copy Public Google Sheet Data to CSV File
+-----
+
 Prerequisites
 
 Setting up the Google Sheets API involves several steps to create credentials, enable the API, and obtain necessary keys:
@@ -63,12 +65,12 @@ GOOGLE_SHEETS_SHEET_ID={sheet1}
 
 After running the script, you can find the Google Sheet data in ./app/unversioned/scripts/data.csv.
 
-
 Python Script to Copy Private Google Sheet Data to CSV File
+-----
 
 Step 1: Create a Google Cloud Project
 
-  * Go to Google Cloud Console: Visit the Google Cloud Console.
+  * Go to Google Cloud Console: Visit the [Google Cloud Console](https://console.cloud.google.com/).
   * Create a New Project: If you don't have an existing project, create a new project using the project selector dropdown at the top of the console.
 
 Step 2: Enable the Google Sheets API
@@ -82,7 +84,7 @@ Step 3: Create Credentials for the API
   * Navigate to APIs & Services > Credentials: In the left-hand menu, navigate to APIs & Services > Credentials.
   * Create Credentials: Click on the "Create Credentials" button and select "Service Account".
   * Enter Service account details
-    example:- 
+    example:-
       name : testdgs
       service account id: testdgs
   * note down email which is auto generated.
@@ -90,8 +92,8 @@ Step 3: Create Credentials for the API
   * Click on continue.
   * Click on done. Now you can see all the service accounts of your project.
   * Click on 3 vertical dots in a action column at the end of the repective service
-  account (testdgs@black-works-429910-c7.iam.gserviceaccount.com  ) row. Click on manage keys.
-  * Click on Add keys , select json and click on create. json file automatcally gets downloaded.
+  account (testdgs@black-works-429910-c7.iam.gserviceaccount.com) row. If you don't see the three dots, click on Manage Service Accounts. Click on manage keys.
+  * Click on Add keys, select json and click on create. json file automatcally gets downloaded.
   * Copy service account json file into secure location.
 
 Step 4: Open Your private google sheet and share it with service account email (ex:- testdgs@black-works-429910-c7.iam.gserviceaccount.com) as a viewer.
