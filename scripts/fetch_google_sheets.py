@@ -50,7 +50,7 @@ except ImportError:
 
 logging.basicConfig(level=logging.ERROR)
 
-# Define common constants
+# See, edit, create, and delete all your Google Sheets spreadsheets.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 def get_google_sheet_data(
