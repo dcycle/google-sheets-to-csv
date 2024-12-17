@@ -20,7 +20,7 @@ Hence we are using list of values from json file.
 You can test this functionality.
 -------------
 
-( Kindly follow `Modify google sheet` section in README as a prerequisites. )
+( Kindly follow `Google sheet Operations` section in README as a prerequisites. )
 
 first you have to create list of values in a json file to add/modify
 in google sheet.
