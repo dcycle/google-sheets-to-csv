@@ -128,7 +128,7 @@ Follow Step1 to Step4 of Copy Private Google Sheet Data to CSV File section to s
 ## Sheets Operations Documentation
 
   Modify Cell Value:-
-  ---
+  ------
 
   Command:-
 
@@ -175,7 +175,7 @@ Follow Step1 to Step4 of Copy Private Google Sheet Data to CSV File section to s
 
 
   Insert Rows and Columns in a google sheet:-
-  ---
+  -----
 
   Command:-
   ```
@@ -185,10 +185,15 @@ Follow Step1 to Step4 of Copy Private Google Sheet Data to CSV File section to s
 
   examples:-
 
+  ```
+    GOOGLE_SERVICE_ACCOUNT_FILE='/app/<your-service-account-file-path>'
+    GOOGLE_SHEETS_SPREADSHEET_ID='<your-google-sheet-id>'
+  ```
+
   1. Insert 2 rows after row 5 in Sheet1.
 
   ```
-  google-sheets-to-csv % ./scripts/insert-rows-columns.sh /path/to/service_account.json <spreadsheet_id> 0 row 5 2 --after
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID 0 row 5 2 --after
   ```
 
   0 -> represents Sheet1 , 1 for Sheet2 .....
@@ -197,17 +202,17 @@ Follow Step1 to Step4 of Copy Private Google Sheet Data to CSV File section to s
   2. Insert 5 rows before row 10 in Sheet1.
 
   ```
-  google-sheets-to-csv % ./scripts/insert-rows-columns.sh /path/to/service_account.json <spreadsheet_id> 0 row 10 5 --before
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID 0 row 10 5 --before
   ```
 
   3. Insert 2 columns after column 5 in Sheet1.
 
   ```
-  google-sheets-to-csv % ./scripts/insert-rows-columns.sh /path/to/service_account.json <spreadsheet_id> 0 column 5 2 --after
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID 0 column 5 2 --after
   ```
 
   4. Insert 12 columns before column 5 in Sheet1.
 
   ```
-  google-sheets-to-csv % ./scripts/insert-rows-columns.sh /path/to/service_account.json <spreadsheet_id> 0 column 5 12 --before
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID 0 column 5 12 --before
   ```
