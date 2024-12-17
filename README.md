@@ -90,13 +90,14 @@ Step 3: Create Credentials for the API
   * note down email which is auto generated.
     example:- testdgs@black-works-429910-c7.iam.gserviceaccount.com
   * Click on continue.
+  * In Assign Roles Select basic `Viewer`.
   * Click on done. Now you can see all the service accounts of your project.
   * Click on 3 vertical dots in a action column at the end of the repective service
   account (testdgs@black-works-429910-c7.iam.gserviceaccount.com) row. If you don't see the three dots, click on Manage Service Accounts. Click on manage keys.
   * Click on Add keys, select json and click on create. json file automatcally gets downloaded.
-  * Copy service account json file into secure location.
+  * Copy service account json file into secure location. Lets say:- /unversioned/<Your-json-file>.json.
 
-Step 4: Open Your private google sheet and share it with service account email (ex:- testdgs@black-works-429910-c7.iam.gserviceaccount.com) as a viewer.
+Step 4: Open Your private google sheet and share it with service account email (ex:- testdgs@black-works-429910-c7.iam.gserviceaccount.com) as a `viewer`.
 
 Replace placeholder and Run below code in terminal.
 
@@ -112,3 +113,106 @@ GOOGLE_SHEETS_SHEET_ID='<Sheet name>'
 ```
 
 Upon sucessfully running the script, you can find the Google Sheet data in ./app/unversioned/scripts/private-google-sheet-data.csv.
+
+
+Google sheet Operations:-
+-----
+
+prequisites
+
+Follow Step1 to Step4 of Copy Private Google Sheet Data to CSV File section to setup a service account file. With below changes.
+
+** Instead of viewer permission set `Editor` permission for IAM service account user at Step3.
+** In Step4 While sharing google sheet to service account email select `editor ` permission then only data can be updated.
+
+## Sheets Operations Documentation
+
+  Modify Cell Value:-
+  ------
+
+  Command:-
+
+  ```
+  google-sheets-to-csv % ./scripts/modify-cell-value.sh <service_account_file_path>
+      <spreadsheet_id> <range> <list_of_values_file_path>
+  ```
+
+  first you have to create list of values in a json file to add/modify in google sheet.
+
+  Examples:-
+
+  Create ./unversioned/list_of_values.json file with below values.
+
+  ```
+      [
+          ["Hello, world!", "How are you?", "Good morning."],
+          ["I love programming.", "Python is awesome!"],
+          ["This is a test.", "Let's explore data structures."]
+      ]
+
+  ```
+
+  then insert these values at B8 Cell in Sheet! we have to run below command.
+
+
+  ```
+  GOOGLE_SERVICE_ACCOUNT_FILE='/app/<your-service-account-file-path>'
+  GOOGLE_SHEETS_SPREADSHEET_ID='<your-google-sheet-id>'
+  RANGE="Sheet1\!B8"
+
+  google-sheets-to-csv % ./scripts/modify-cell-value.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID $RANGE  '/app/unversioned/list_of_values.json'
+
+  ```
+
+  Now the values are replaced at B8 C8 D8, B9 C9, B10 C10 cells in Sheet1.
+
+  In list_of_values.json file:-
+
+  if You have provided [["row 1"]] then only B8 cell has modified.
+  if You have provided [["row 1"]["row 2"]] then A8,B9 cells has modified.
+  if You have provided [["row 1, "col 1"]] then B8,C* cells has modified.
+  if You have provided [["row 1, "col 1"],["row 2, "col 2"]] then B8 C8,B9 C9 cell has modified.
+
+
+  Insert Rows and Columns in a google sheet:-
+  -----
+
+  Command:-
+  ```
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh </app/path/to/service_account.json> <spreadsheet_id> <sheet_id> <row|column> <position>
+  <number of rows/columns> <--after|--before>
+  ```
+
+  examples:-
+
+  ```
+    GOOGLE_SERVICE_ACCOUNT_FILE='/app/<your-service-account-file-path>'
+    GOOGLE_SHEETS_SPREADSHEET_ID='<your-google-sheet-id>'
+  ```
+
+  1. Insert 2 rows after row 5 in Sheet1.
+
+  ```
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID 0 row 5 2 --after
+  ```
+
+  0 -> represents Sheet1 , 1 for Sheet2 .....
+
+
+  2. Insert 5 rows before row 10 in Sheet1.
+
+  ```
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID 0 row 10 5 --before
+  ```
+
+  3. Insert 2 columns after column 5 in Sheet1.
+
+  ```
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID 0 column 5 2 --after
+  ```
+
+  4. Insert 12 columns before column 5 in Sheet1.
+
+  ```
+  google-sheets-to-csv % ./scripts/insert-rows-columns.sh $GOOGLE_SERVICE_ACCOUNT_FILE $GOOGLE_SHEETS_SPREADSHEET_ID 0 column 5 12 --before
+  ```

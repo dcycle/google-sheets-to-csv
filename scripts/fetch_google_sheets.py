@@ -21,26 +21,28 @@ import logging
 import os
 import sys
 
+# Import the common import handling function. We can disable pylint.
+# pylint: disable=R0801
 try:
-    from googleapiclient.discovery import build
+    from common_imports import common_imports_modules
 except ImportError:
-    logging.error("Failed to import 'googleapiclient.discovery'.")
-    logging.error("Please ensure you have installed 'google-api-python-client'.")
+    logging.error("Failed to import 'common_imports'.")
+    logging.error("Please ensure you have common_imports.py")
     sys.exit(1)
 
+# Call the function to get the necessary modules
+authenticate = common_imports_modules()
+
+# pylint: disable=R0801
 try:
-    from googleapiclient.errors import HttpError
+    from google_api_helper import google_api_helper_modules
 except ImportError:
-    logging.error("Failed to import 'googleapiclient.errors'.")
-    logging.error("Please ensure you have installed 'google-api-python-client'.")
+    logging.error("Failed to import 'google_api_helper'.")
+    logging.error("Please ensure you have google_api_helper.py")
     sys.exit(1)
 
-try:
-    from google.oauth2 import service_account
-except ImportError:
-    logging.error("Failed to import 'google.oauth2'.")
-    logging.error("Please ensure you have installed 'google-auth-oauthlib'.")
-    sys.exit(1)
+# Call the function to get the necessary modules
+build, HttpError = google_api_helper_modules()
 
 try:
     import gspread
@@ -73,9 +75,7 @@ def get_google_sheet_data(
     """
     try:
         if private:
-            creds = service_account.Credentials.from_service_account_file(
-              service_account_file, scopes=SCOPES
-            )
+            creds = authenticate(service_account_file, SCOPES)
             client = gspread.Client(auth=creds)
             spreadsheet = client.open_by_key(spreadsheet_id)
             sheet = spreadsheet.worksheet(range_name) if range_name else spreadsheet.sheet1
